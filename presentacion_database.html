@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title> Base de datos</title>
+
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+
+<link rel="stylesheet" href="assets/css/common.css" type="text/css" />
+<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css" type="text/css" />
+<link rel="stylesheet" href="https://pictogrammers.github.io/@mdi/font/6.9.96/css/materialdesignicons.min.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Probabilidad y estadistica</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fad fa-home"></span>
+     
+     Inicio
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fad fa-screen-users"></span>
+     
+     Presentacion
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="presentacion_problema.html">
+        <span class="fad fa-circle-exclamation"></span>
+         
+         El Problema
+      </a>
+    </li>
+    <li>
+      <a href="presentacion_marco.html">
+        <span class="fad fa-book-sparkles"></span>
+         
+         Marco teorico
+      </a>
+    </li>
+    <li>
+      <a href="presentacion_database.html">
+        <span class="fad fa-database"></span>
+         
+         Base de datos
+      </a>
+    </li>
+    <li>
+      <a href="presentacion_objetivos.html">
+        <span class="fad fa-bullseye-arrow"></span>
+         
+         Objetivos
+      </a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fad fa-face-hand-peeking"></span>
+     
+     Preeliminares
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="analisis_limpieza.html">
+        <span class="fad fa-bath"></span>
+         
+         Limpieza
+      </a>
+    </li>
+    <li>
+      <a href="analisis_exploratorio.html">
+        <span class="fad fa-face-monocle"></span>
+         
+         Analisis exploratorio
+      </a>
+    </li>
+    <li>
+      <a href="analisis_contingencia.html">
+        <span class="fad fa-file-spreadsheet"></span>
+         
+         Tablas contingencia
+      </a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fad fa-chart-simple"></span>
+     
+     Probabilidad
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="probabilidad_distribuciones.html">
+        <span class="fad fa-diagram-project"></span>
+         
+         Distribuciones
+      </a>
+    </li>
+    <li>
+      <a href="distribuciones_discretas.html">
+        <span class="fad fa-face-disguise"></span>
+         
+         Distribuciones discretas
+      </a>
+    </li>
+    <li>
+      <a href="pruebas_normalidad.html">
+        <span class="fad fa-list-check"></span>
+         
+         Pruebas de normalidad
+      </a>
+    </li>
+    <li>
+      <a href="ajustes_de_bondad.html">
+        <span class="fad fa-sliders"></span>
+         
+         Ajustes de bondad
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fad fa-address-card"></span>
+     
+     Acerca de
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="about.html">
+        <span class="fad fa-user-bounty-hunter"></span>
+         
+         Autor
+      </a>
+    </li>
+    <li>
+      <a href="funciones.html">
+        <span class="fad fa-terminal"></span>
+         
+         Funciones
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore"><i class='fad fa-database'></i> Base de
+datos</h1>
+
+</div>
+
+
+<style>
+.llaves {
+  display:block;
+  padding: 0.5rem;
+  margin: 0 0.25rem;
+  border: 2px solid #333333;
+  border-bottom-color: transparent;
+  border-top-color: transparent;
+  border-radius: .5rem
+}
+</style>
+<div id="obteniendo-la-informacion" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Obteniendo la
+informacion</h1>
+<blockquote>
+<p>Durante el periodo de octubre del 2020 a marzo del 2021 en el marco
+de la emergencia sanitaria se ejecuta el contrato de interventoria para
+<strong>DEMARCACION Y SEÑALIZACIÓN DE LAS INSTALACIONES DE LAS
+INSTITUCIONES EDUCATIVAS DISTRITALES, EN MARCO DEL REGRESO SEGURO Y
+PROGRESIVO DE LA SECRETARIA DE EDUCACIÓN</strong> por lo que la empresa
+AC2R, contrata a Edwin Marroquin para llevar el control de la
+informacion relacionada con la ejecucion de las actividades programadas
+en cada una de las <strong>IED</strong>, teniendo en cuenta el periodo
+de ejecucion y las cantidades en cada una de las sedes, en consecuencia
+se planteo un archivo en excel en donde se ingresaron en detalle cada
+una de las tareas realizadas, adicional a esto se plantea un documento
+adicional en donde se resume en terminos generales el consumo del
+recurso <strong>FOME <em>(Fondo de Mitigación de
+Emergencias)</em></strong>, ofreciendo una base de datos con el uso de
+estos recursos en cada una de las sedes educativas.</p>
+</blockquote>
+</div>
+<div id="informacion-obtenida" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Informacion
+obtenida</h1>
+<blockquote>
+<p>De la base de datos se obtienen la localizacion de cada una de las
+sedes, adicional al valor previsto y empleado para la ejecucion de las
+actividades, el periodo de ejecucion y por ultimo los profesionales
+responsables de velar por el buen uso de los recursos en cada IED.</p>
+</blockquote>
+</div>
+<div id="variables" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Variables</h1>
+<div id="números" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Números</h2>
+<blockquote>
+<p>La base de datos inicialmente cuenta con <span
+class="badge bg-primary">779</span> registros</p>
+<p>La base de datos inicialmente cuenta con <span
+class="badge bg-primary">13</span> variables</p>
+</blockquote>
+</div>
+<div id="espacios-muestrales" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Espacios
+muestrales</h2>
+<table>
+<colgroup>
+<col width="27%" />
+<col width="13%" />
+<col width="58%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">VARIABLE</th>
+<th align="center">TIPO</th>
+<th align="left">ESPACIO MUESTRAL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ID</td>
+<td align="center">entero</td>
+<td align="left"><span class="llaves">1:779</span></td>
+</tr>
+<tr class="even">
+<td align="left">ZONA</td>
+<td align="center">texto</td>
+<td align="left"><span class="llaves">N , OR , S , OC</span></td>
+</tr>
+<tr class="odd">
+<td align="left">LOC</td>
+<td align="center">entero</td>
+<td align="left"><span class="llaves">USAQUÉN , CHAPINERO , SANTA FÉ ,
+SAN CRISTÓBAL , USME , TUNJUELITO , BOSA , KENNEDY , FONTIBÓN , ENGATIVÁ
+, SUBA , BARRIOS UNIDOS , TEUSAQUILLO , LOS MÁRTIRES , ANTONIO NARIÑO ,
+PUENTE ARANDA , LA CANDELARIA , RAFAEL URIBE URIBE , CIUDAD BOLÍVAR ,
+SUMAPAZ</span></td>
+</tr>
+<tr class="even">
+<td align="left">NOMBRE COLEGIO</td>
+<td align="center">texto</td>
+<td align="left"><span class="llaves"></span></td>
+</tr>
+<tr class="odd">
+<td align="left">SEDE</td>
+<td align="center">texto</td>
+<td align="left"><span class="llaves">B , C , A , D , E , G , F , M , L
+, I , J , K , N , H</span></td>
+</tr>
+<tr class="even">
+<td align="left">CLASE</td>
+<td align="center">texto</td>
+<td align="left"><span class="llaves">DISTRITAL , ADMINISTRACION ,
+ARRIENDO</span></td>
+</tr>
+<tr class="odd">
+<td align="left">ACTA</td>
+<td align="center">entero</td>
+<td align="left"><span class="llaves">14 , 18 , 15 , 17 , 16 , 10 , 0 ,
+13 , 11 , 9 , 12</span></td>
+</tr>
+<tr class="even">
+<td align="left">ENCARGADO</td>
+<td align="center">texto</td>
+<td align="left"><span class="llaves">DIEGO RAMÍREZ POVEDA , JEISSON
+BERMÚDEZ JARA , ANDERSON CELY IZAQUITA , JUAN CARLOS RINCÓN , OSCAR IVÁN
+SALAMANCA , BRYAN CALDERÓN OSMA , DANIEL RAMÍREZ RODRÍGUEZ , SIN ASIGNAR
+, FABIÁN LÓPEZ VANEGAS , YESID TORRES HERNÁNDEZ , MABEL OLARTE VELANDIA
+, IVONNE ASPRILLA REINA , DUVAN GUANUMEN CASTILLO , EDWIN MARROQUÍN
+BUSTOS</span></td>
+</tr>
+<tr class="odd">
+<td align="left">VALOR_DIAGNOSTICO</td>
+<td align="center">moneda</td>
+<td align="left"><span class="llaves"></span></td>
+</tr>
+<tr class="even">
+<td align="left">VALOR_EJECUCION</td>
+<td align="center">moneda</td>
+<td align="left"><span class="llaves"></span></td>
+</tr>
+<tr class="odd">
+<td align="left">FECHA_EJECUCION</td>
+<td align="center">fecha</td>
+<td align="left"><span class="llaves"></span></td>
+</tr>
+<tr class="even">
+<td align="left">RESIDENTE</td>
+<td align="center">texto</td>
+<td align="left"><span class="llaves">JUAN CARLOS RINCÓN , OSCAR IVÁN
+SALAMANCA</span></td>
+</tr>
+<tr class="odd">
+<td align="left">FOME</td>
+<td align="center">boleano</td>
+<td align="left"><span class="llaves">FALSE , TRUE</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="diccionario-de-variables" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Diccionario de
+variables</h1>
+<style>
+  .container--table table.table colgroup col:first-child {
+      width: 10%;
+  }
+</style>
+<div class="container--table">
+<table>
+<colgroup>
+<col width="13%" />
+<col width="86%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">VARIABLE</th>
+<th align="left">DESCRIPCION</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ID</td>
+<td align="left">Identificado único de cada una de las sedes
+educativas</td>
+</tr>
+<tr class="even">
+<td align="left">ZONA</td>
+<td align="left">Zona geográfica obtenida a partir de la posición
+cartesiana dentro de la ciudad</td>
+</tr>
+<tr class="odd">
+<td align="left">LOC</td>
+<td align="left">Hace referencia a la división administrativa en el
+territorio de la ciudad de Bogotá también conocido como Localidad</td>
+</tr>
+<tr class="even">
+<td align="left">NOMBRE COLEGIO</td>
+<td align="left">Nombre del colegio</td>
+</tr>
+<tr class="odd">
+<td align="left">SEDE</td>
+<td align="left">Letra asignada a cada una de las instituciones
+educativas distritales con el mismo nombre de colegio</td>
+</tr>
+<tr class="even">
+<td align="left">CLASE</td>
+<td align="left">Se refiere al origen del rubro asignado para el
+funcionamiento de las instituciones educativas distritales</td>
+</tr>
+<tr class="odd">
+<td align="left">ACTA</td>
+<td align="left">Es el acta de obra en donde se realiza el cobro de las
+actividades ejecutadas durante un periodo de tiempo determinado</td>
+</tr>
+<tr class="even">
+<td align="left">ENCARGADO</td>
+<td align="left">Es el personal técnico encargado de velar por el buen
+uso de los recursos destinados para la ejecución de las actividades</td>
+</tr>
+<tr class="odd">
+<td align="left">VALOR_DIAGNOSTICO</td>
+<td align="left">Valor propuesto para la ejecución de las actividades en
+cada una de las IED</td>
+</tr>
+<tr class="even">
+<td align="left">VALOR_EJECUCION</td>
+<td align="left">Valor real de las actividades ejecutadas en cada una de
+las IED</td>
+</tr>
+<tr class="odd">
+<td align="left">FECHA_EJECUCION</td>
+<td align="left">Periodo en el que se ejecutaron las actividades, el
+cual esta comprendido dentro de la ejecución del contrato</td>
+</tr>
+<tr class="even">
+<td align="left">RESIDENTE</td>
+<td align="left">Es el personal profesional encargado coordinar la
+ejecución de las actividades</td>
+</tr>
+<tr class="odd">
+<td align="left">FOME</td>
+<td align="left">Identificador dicotómico el cual confirma el uso de los
+recursos FOME</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="preguntas" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Preguntas</h1>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li><p>¿Cual fue la asignacion de recursos en cada una de las
+localidades de Bogotá?</p></li>
+<li><p>¿Que porcentaje de las sedes educativas distritales, fueron
+afectadas por el recurso FOME?</p></li>
+<li><p>¿Cual es la diferencia porcentual en cada una de las sedes
+comparando <strong>valor diagnostico</strong> vs <strong>valor
+ejecutado</strong>?</p></li>
+</ol>
+</blockquote>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5,h6",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

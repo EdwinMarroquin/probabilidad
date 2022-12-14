@@ -1,0 +1,15 @@
+.tocify-extend-page {
+  height: auto !important;
+}
+
+.fad, .far, .fal, .fa {
+  min-width: 2.5rem;
+  text-align: left;
+}
+
+.table-bern table,
+.table-bern table th,
+.table-bern table td{
+  border: 1px solid silver;
+  font-size: 12px;
+}

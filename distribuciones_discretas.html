@@ -1,0 +1,1956 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title> Distribuciones de probabilidad discreta</title>
+
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #232629;
+    color: #7a7c7d;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+div.sourceCode
+  { color: #cfcfc2; background-color: #232629; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #cfcfc2; } /* Normal */
+code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+code span.an { color: #3f8058; } /* Annotation */
+code span.at { color: #2980b9; } /* Attribute */
+code span.bn { color: #f67400; } /* BaseN */
+code span.bu { color: #7f8c8d; } /* BuiltIn */
+code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #3daee9; } /* Char */
+code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+code span.co { color: #7a7c7d; } /* Comment */
+code span.cv { color: #7f8c8d; } /* CommentVar */
+code span.do { color: #a43340; } /* Documentation */
+code span.dt { color: #2980b9; } /* DataType */
+code span.dv { color: #f67400; } /* DecVal */
+code span.er { color: #da4453; text-decoration: underline; } /* Error */
+code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+code span.fl { color: #f67400; } /* Float */
+code span.fu { color: #8e44ad; } /* Function */
+code span.im { color: #27ae60; } /* Import */
+code span.in { color: #c45b00; } /* Information */
+code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+code span.op { color: #cfcfc2; } /* Operator */
+code span.ot { color: #27ae60; } /* Other */
+code span.pp { color: #27ae60; } /* Preprocessor */
+code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #da4453; } /* SpecialString */
+code span.st { color: #f44f4f; } /* String */
+code span.va { color: #27aeae; } /* Variable */
+code span.vs { color: #da4453; } /* VerbatimString */
+code span.wa { color: #da4453; } /* Warning */
+
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="assets/css/common.css" type="text/css" />
+<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css" type="text/css" />
+<link rel="stylesheet" href="https://pictogrammers.github.io/@mdi/font/6.9.96/css/materialdesignicons.min.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Probabilidad y estadistica</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fad fa-home"></span>
+     
+     Inicio
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fad fa-screen-users"></span>
+     
+     Presentacion
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="presentacion_problema.html">
+        <span class="fad fa-circle-exclamation"></span>
+         
+         El Problema
+      </a>
+    </li>
+    <li>
+      <a href="presentacion_marco.html">
+        <span class="fad fa-book-sparkles"></span>
+         
+         Marco teorico
+      </a>
+    </li>
+    <li>
+      <a href="presentacion_database.html">
+        <span class="fad fa-database"></span>
+         
+         Base de datos
+      </a>
+    </li>
+    <li>
+      <a href="presentacion_objetivos.html">
+        <span class="fad fa-bullseye-arrow"></span>
+         
+         Objetivos
+      </a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fad fa-face-hand-peeking"></span>
+     
+     Preeliminares
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="analisis_limpieza.html">
+        <span class="fad fa-bath"></span>
+         
+         Limpieza
+      </a>
+    </li>
+    <li>
+      <a href="analisis_exploratorio.html">
+        <span class="fad fa-face-monocle"></span>
+         
+         Analisis exploratorio
+      </a>
+    </li>
+    <li>
+      <a href="analisis_contingencia.html">
+        <span class="fad fa-file-spreadsheet"></span>
+         
+         Tablas contingencia
+      </a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fad fa-chart-simple"></span>
+     
+     Probabilidad
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="probabilidad_distribuciones.html">
+        <span class="fad fa-diagram-project"></span>
+         
+         Distribuciones
+      </a>
+    </li>
+    <li>
+      <a href="distribuciones_discretas.html">
+        <span class="fad fa-face-disguise"></span>
+         
+         Distribuciones discretas
+      </a>
+    </li>
+    <li>
+      <a href="pruebas_normalidad.html">
+        <span class="fad fa-list-check"></span>
+         
+         Pruebas de normalidad
+      </a>
+    </li>
+    <li>
+      <a href="ajustes_de_bondad.html">
+        <span class="fad fa-sliders"></span>
+         
+         Ajustes de bondad
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fad fa-address-card"></span>
+     
+     Acerca de
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="about.html">
+        <span class="fad fa-user-bounty-hunter"></span>
+         
+         Autor
+      </a>
+    </li>
+    <li>
+      <a href="funciones.html">
+        <span class="fad fa-terminal"></span>
+         
+         Funciones
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore"><i class='fad fa-face-disguise'></i>
+Distribuciones de probabilidad discreta</h1>
+
+</div>
+
+
+<blockquote>
+<p>Se obtiene a partir de la realización de n experimentos de Bernoulli
+de manera sucesiva, teniendo en cuenta que cada evento es independiente
+del anterior. Esta distribución, proporciona la probabilidad de observar
+x éxitos en la secuencia de ensayos o experimentos.</p>
+</blockquote>
+<div class="table-bern">
+<table>
+<colgroup>
+<col width="27%" />
+<col width="13%" />
+<col width="13%" />
+<col width="17%" />
+<col width="27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Notacion</th>
+<th align="center">f(x)</th>
+<th align="center">F(x)</th>
+<th align="center">Media</th>
+<th align="center">Varianza</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math display">\[ X \sim B(n,p)
+\]</span></td>
+<td align="center"><span class="math display">\[ \begin{array}{lcc}
+\binom{n}{x}p^{x}(1-p)^{n-x} &amp; si \quad x=0,1,2,3,.. \\ 0
+&amp;  \quad \text{En otro caso}  \end{array}\]</span></td>
+<td align="center"><span class="math display">\[ \]</span></td>
+<td align="center"><span class="math display">\[ \mu = E(X) = np
+\]</span></td>
+<td align="center"><span class="math display">\[ \sigma_x^2 =np(1-p)
+\]</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="llamado-de-datos" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Llamado de datos</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>DB <span class="ot">&lt;-</span> <span class="fu">getDatabaseClean</span>(<span class="st">&quot;dataset.xlsx&quot;</span>, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;VALOR_EJECUCION&quot;</span>)</span></code></pre></div>
+<div id="proceso-de-limpieza-de-datos" class="section level2"
+number="1.1">
+<h2><span class="header-section-number">1.1</span> Proceso de limpieza
+de datos</h2>
+<blockquote>
+<p>RESGISTROS ANTES DE LA LIMPIEZA <span
+class="badge bg-primary">779</span></p>
+<p>RESGISTROS LUEGO DE LA LIMPIEZA <span
+class="badge bg-primary">713</span></p>
+</blockquote>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> DB<span class="sc">$</span>data</span></code></pre></div>
+</div>
+</div>
+<div id="experimentos" class="section level1 tabset" number="2">
+<h1 class="tabset"><span class="header-section-number">2</span>
+Experimentos</h1>
+<div id="zona" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Zona</h2>
+<div id="planteamiento" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Planteamiento</h3>
+<blockquote>
+<p>El <span class="math inline">\(0.26648\approx26.648\%\)</span> de
+sedes educativas distritales se encuentran localizados en la
+<strong>ZONA NORTE</strong> de la ciudad, si se toman 20 colegios al
+azar ¿Cual es la probabilidad de obtener 2 colegios ubicados al
+<strong>NORTE</strong> de la ciudad?</p>
+</blockquote>
+</div>
+<div id="análisis-de-los-datos-procedentes-de-la-zona"
+class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Análisis de los
+datos procedentes de la <em>ZONA</em></h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span><span class="fu">binomial</span>(<span class="dv">2</span>,<span class="dv">20</span>, data, <span class="st">&quot;ZONA&quot;</span>, <span class="st">&quot;N&quot;</span>)</span></code></pre></div>
+<hr>
+<span class="math display">\[ \mbox{FUNCION DE PROBABILIDAD} \]</span>
+<br> <span class="math display">\[ X \sim B( 20 ,  0.26648 ) \\
+\begin{array}{lcc} f(x) = \binom{ 20 }{x} 0.26648 ^{x}(1- 0.26648 )^{ 20
+-x} &amp; si &amp; \quad x=0,1,2,3,... \end{array} \]</span><span
+class="math display">\[ X \sim B( 20 ,  0.26648 ) \\ \begin{array}{lcc}
+f( 2 ) = \binom{ 20 }{ 2 } 0.26648 ^{ 2 }(1- 0.26648 )^{ 20 - 2 } &amp;
+si &amp; \quad x=0,1,2,3,... \end{array} \]</span> <br> <span
+class="math display">\[ \mbox{la probabilidad es del: } 0.05099154
+\approx 5.1 \% \]</span><br>
+<hr>
+<span class="math display">\[ \mbox{MEDIA} \]</span> <br> <span
+class="math display">\[ \begin{align*} \mu = E(X) &amp; = np \\ &amp;
+=  20 * 0.26648  \\ &amp; =   5.3296  \end{align*} \]</span><br>
+<hr>
+<p><span class="math display">\[ \mbox{VARIANZA} \]</span> <br> <span
+class="math display">\[ \begin{align*} \sigma_x^2 &amp; = np(1-p) \\
+&amp; =  20 * 0.26648 *(1- 0.26648 ) \\ &amp; =   3.909368  \end{align*}
+\]</span></p>
+</div>
+</div>
+<div id="fome" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Fome</h2>
+<div id="planteamiento-1" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Planteamiento</h3>
+<blockquote>
+<p>Se tiene que el <span
+class="math inline">\(0.488079\approx48.8079\%\)</span> de sedes
+educativas distritales han hecho uso de los recuros del <strong>FONDO
+PARA LA ATENCION DE EMERGENCIAS</strong> destinado por la Alcaldía de
+Bogotá, si se toman 15 colegios al azar ¿Cual es la probabilidad de
+obtener 3 colegio que haya hecho uso de los recursos
+<strong>FOME</strong>?</p>
+</blockquote>
+</div>
+<div id="análisis-de-los-datos-procedentes-del-recurso-fome"
+class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Análisis de los
+datos procedentes del recurso <em>FOME</em></h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span><span class="fu">binomial</span>(<span class="dv">3</span>,<span class="dv">15</span>, data, <span class="st">&quot;FOME&quot;</span>, <span class="cn">TRUE</span>)</span></code></pre></div>
+<hr>
+<span class="math display">\[ \mbox{FUNCION DE PROBABILIDAD} \]</span>
+<br> <span class="math display">\[ X \sim B( 15 ,  0.488079 ) \\
+\begin{array}{lcc} f(x) = \binom{ 15 }{x} 0.488079 ^{x}(1- 0.488079 )^{
+15 -x} &amp; si &amp; \quad x=0,1,2,3,... \end{array} \]</span><span
+class="math display">\[ X \sim B( 15 ,  0.488079 ) \\ \begin{array}{lcc}
+f( 3 ) = \binom{ 15 }{ 3 } 0.488079 ^{ 3 }(1- 0.488079 )^{ 15 - 3 }
+&amp; si &amp; \quad x=0,1,2,3,... \end{array} \]</span> <br> <span
+class="math display">\[ \mbox{la probabilidad es del: } 0.0171363
+\approx 1.71 \% \]</span><br>
+<hr>
+<span class="math display">\[ \mbox{MEDIA} \]</span> <br> <span
+class="math display">\[ \begin{align*} \mu = E(X) &amp; = np \\ &amp;
+=  15 * 0.488079  \\ &amp; =   7.321185  \end{align*} \]</span><br>
+<hr>
+<p><span class="math display">\[ \mbox{VARIANZA} \]</span> <br> <span
+class="math display">\[ \begin{align*} \sigma_x^2 &amp; = np(1-p) \\
+&amp; =  15 * 0.488079 *(1- 0.488079 ) \\ &amp;
+=   3.747868  \end{align*} \]</span></p>
+</div>
+</div>
+<div id="localidad" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Localidad</h2>
+<div id="planteamiento-2" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Planteamiento</h3>
+<blockquote>
+<p>La ciudad de Bogotá cuenta con 20 localidades, de las cuales solo 19
+fueron beneficiarias de los recursos <strong>FOME</strong>, por lo que
+solo se tienen en cuenta las 19 localidades intervenidas, en base a lo
+anterior se determina que la localidad 19 <strong>Ciudad
+Bolívar</strong> cuenta con el <span
+class="math inline">\(0.115007\approx11.5007\%\)</span> de las sedes
+educativas distritales distribuidas a lo largo y ancho de Bogotá, al
+tomar 19 colegios al azar cual es la probabilidad de que 3 de estos no
+pertenezcan a <strong>Ciudad Bolívar</strong></p>
+</blockquote>
+</div>
+<div id="análisis-de-los-datos-procedentes-de-la-localidad"
+class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Análisis de los
+datos procedentes de la <em>LOCALIDAD</em></h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">binomial</span>(<span class="dv">3</span>,<span class="dv">19</span>, data, <span class="st">&quot;LOC&quot;</span>, <span class="st">&quot;CIUDAD BOLÍVAR&quot;</span>)</span></code></pre></div>
+<hr>
+<span class="math display">\[ \mbox{FUNCION DE PROBABILIDAD} \]</span>
+<br> <span class="math display">\[ X \sim B( 19 ,  0.115007 ) \\
+\begin{array}{lcc} f(x) = \binom{ 19 }{x} 0.115007 ^{x}(1- 0.115007 )^{
+19 -x} &amp; si &amp; \quad x=0,1,2,3,... \end{array} \]</span><span
+class="math display">\[ X \sim B( 19 ,  0.115007 ) \\ \begin{array}{lcc}
+f( 3 ) = \binom{ 19 }{ 3 } 0.115007 ^{ 3 }(1- 0.115007 )^{ 19 - 3 }
+&amp; si &amp; \quad x=0,1,2,3,... \end{array} \]</span> <br> <span
+class="math display">\[ \mbox{la probabilidad es del: } 0.2087055
+\approx 20.87 \% \]</span><br>
+<hr>
+<span class="math display">\[ \mbox{MEDIA} \]</span> <br> <span
+class="math display">\[ \begin{align*} \mu = E(X) &amp; = np \\ &amp;
+=  19 * 0.115007  \\ &amp; =   2.185133  \end{align*} \]</span><br>
+<hr>
+<p><span class="math display">\[ \mbox{VARIANZA} \]</span> <br> <span
+class="math display">\[ \begin{align*} \sigma_x^2 &amp; = np(1-p) \\
+&amp; =  19 * 0.115007 *(1- 0.115007 ) \\ &amp;
+=   1.933827  \end{align*} \]</span></p>
+<blockquote>
+<p>Dado que la funcion programada solo muestra la probabilidad de
+ocurrencia de un evento y puesto que en el experiemento se plantea la no
+ocurrencia de un evento se procede a tomar la resta de la probabilidad
+de ocurrencia de todo el espacio muestral y la probabilidad de
+ocurrencia del evento</p>
+</blockquote>
+</div>
+<div id="conclusion" class="section level3" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Conclusion</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;&gt; La probabilidad de tomar 3 colegios que no pertenecen a Ciudad Bolivar es del : **&quot;</span>, <span class="fu">round</span>((<span class="dv">1</span> <span class="sc">-</span> <span class="fu">dbinom</span>(<span class="dv">3</span>,<span class="dv">19</span>,<span class="fu">porcentaje</span>(<span class="st">&quot;LOC&quot;</span>, <span class="st">&quot;CIUDAD BOLÍVAR&quot;</span>, data)<span class="sc">$</span>value))<span class="sc">*</span><span class="dv">100</span>,<span class="dv">3</span>),<span class="st">&quot;%**&quot;</span>, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<blockquote>
+<p>La probabilidad de tomar 3 colegios que no pertenecen a Ciudad
+Bolivar es del : <strong>79.129%</strong></p>
+</blockquote>
+</div>
+</div>
+<div id="inspectores" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Inspectores</h2>
+<div id="planteamiento-3" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Planteamiento</h3>
+<blockquote>
+<p>Durante la ejecucion de las sedes educativas se asignaron un equipo
+de tecnicos para el control de la ejecucion de las actividades dentro de
+las instalaciones de cada colegio, pero ha evidenciado que la
+distribucion de cada punto a intervenir no ha sido equitativa, al
+realizar un barrido rapido se evidencia que:</p>
+</blockquote>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">replaceDataIndex</span>(data, <span class="st">&quot;LOC&quot;</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tablaContingencia</span>(d,<span class="st">&quot;ENCARGADO&quot;</span>,<span class="st">&quot;LOC&quot;</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<h4>
+TABLA DE CONTINGENCIA PARA LAS VARIABLES ENCARGADO y LOC
+</h4>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+1
+</th>
+<th style="text-align:right;">
+10
+</th>
+<th style="text-align:right;">
+11
+</th>
+<th style="text-align:right;">
+12
+</th>
+<th style="text-align:right;">
+13
+</th>
+<th style="text-align:right;">
+14
+</th>
+<th style="text-align:right;">
+15
+</th>
+<th style="text-align:right;">
+16
+</th>
+<th style="text-align:right;">
+17
+</th>
+<th style="text-align:right;">
+18
+</th>
+<th style="text-align:right;">
+19
+</th>
+<th style="text-align:right;">
+2
+</th>
+<th style="text-align:right;">
+3
+</th>
+<th style="text-align:right;">
+4
+</th>
+<th style="text-align:right;">
+5
+</th>
+<th style="text-align:right;">
+6
+</th>
+<th style="text-align:right;">
+7
+</th>
+<th style="text-align:right;">
+8
+</th>
+<th style="text-align:right;">
+9
+</th>
+<th style="text-align:right;">
+Sum
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+ANDERSON CELY IZAQUITA
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+9.12
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.54
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+0.84
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+1.40
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+14.02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BRYAN CALDERÓN OSMA
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.56
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+3.65
+</td>
+<td style="text-align:right;">
+0.56
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+6.73
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DANIEL RAMÍREZ RODRÍGUEZ
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+3.51
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.56
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+4.91
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DIEGO RAMÍREZ POVEDA
+</td>
+<td style="text-align:right;">
+1.54
+</td>
+<td style="text-align:right;">
+3.09
+</td>
+<td style="text-align:right;">
+1.26
+</td>
+<td style="text-align:right;">
+1.68
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.68
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+0.84
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.56
+</td>
+<td style="text-align:right;">
+2.38
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.12
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+16.11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DUVAN GUANUMEN CASTILLO
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+6.59
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.54
+</td>
+<td style="text-align:right;">
+9.53
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EDWIN MARROQUÍN BUSTOS
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FABIÁN LÓPEZ VANEGAS
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.70
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IVONNE ASPRILLA REINA
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+2.10
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+2.38
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+JEISSON BERMÚDEZ JARA
+</td>
+<td style="text-align:right;">
+1.68
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+2.52
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.84
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.12
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+6.17
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+13.59
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+JUAN CARLOS RINCÓN
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.82
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.70
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.26
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+1.68
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.12
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+7.98
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MABEL OLARTE VELANDIA
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.84
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+2.81
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+3.79
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+OSCAR IVÁN SALAMANCA
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.26
+</td>
+<td style="text-align:right;">
+0.84
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.84
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+2.24
+</td>
+<td style="text-align:right;">
+0.70
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+1.40
+</td>
+<td style="text-align:right;">
+3.23
+</td>
+<td style="text-align:right;">
+1.54
+</td>
+<td style="text-align:right;">
+1.68
+</td>
+<td style="text-align:right;">
+1.54
+</td>
+<td style="text-align:right;">
+1.82
+</td>
+<td style="text-align:right;">
+18.49
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SIN ASIGNAR
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+YESID TORRES HERNÁNDEZ
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sum
+</td>
+<td style="text-align:right;">
+3.50
+</td>
+<td style="text-align:right;">
+8.98
+</td>
+<td style="text-align:right;">
+9.11
+</td>
+<td style="text-align:right;">
+3.36
+</td>
+<td style="text-align:right;">
+0.70
+</td>
+<td style="text-align:right;">
+1.82
+</td>
+<td style="text-align:right;">
+1.68
+</td>
+<td style="text-align:right;">
+4.48
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+7.00
+</td>
+<td style="text-align:right;">
+11.50
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+2.24
+</td>
+<td style="text-align:right;">
+8.26
+</td>
+<td style="text-align:right;">
+9.54
+</td>
+<td style="text-align:right;">
+3.92
+</td>
+<td style="text-align:right;">
+8.27
+</td>
+<td style="text-align:right;">
+10.51
+</td>
+<td style="text-align:right;">
+3.64
+</td>
+<td style="text-align:right;">
+99.91
+</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>En la tabla anterior se observa que el inspector <strong>DIEGO
+RAMÍREZ POVEDA</strong> tiene a su responsabilidad el
+<strong>16.1290323%</strong> de las sedes educativas.</p>
+</blockquote>
+<blockquote>
+<p>Tomando como referencias los resultados obtenidos del inspector
+<strong>DIEGO RAMÍREZ POVEDA</strong>, el Supervisor ha tomado 14
+colegios de forma aleatoria, ¿Cual es la probabilidad de que 3 de estos
+hayan sido controlados por <strong>DIEGO RAMÍREZ POVEDA</strong>?</p>
+</blockquote>
+</div>
+<div id="análisis-de-los-datos-procedentes-de-los-inspectores"
+class="section level3" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Análisis de los
+datos procedentes de los <em>INSPECTORES</em></h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">binomial</span>(<span class="dv">3</span>, <span class="dv">14</span>, data, <span class="st">&quot;ENCARGADO&quot;</span>, encargadoNombre)</span></code></pre></div>
+<hr>
+<span class="math display">\[ \mbox{FUNCION DE PROBABILIDAD} \]</span>
+<br> <span class="math display">\[ X \sim B( 14 ,  0.16129 ) \\
+\begin{array}{lcc} f(x) = \binom{ 14 }{x} 0.16129 ^{x}(1- 0.16129 )^{ 14
+-x} &amp; si &amp; \quad x=0,1,2,3,... \end{array} \]</span><span
+class="math display">\[ X \sim B( 14 ,  0.16129 ) \\ \begin{array}{lcc}
+f( 3 ) = \binom{ 14 }{ 3 } 0.16129 ^{ 3 }(1- 0.16129 )^{ 14 - 3 } &amp;
+si &amp; \quad x=0,1,2,3,... \end{array} \]</span> <br> <span
+class="math display">\[ \mbox{la probabilidad es del: } 0.2206245
+\approx 22.06 \% \]</span><br>
+<hr>
+<span class="math display">\[ \mbox{MEDIA} \]</span> <br> <span
+class="math display">\[ \begin{align*} \mu = E(X) &amp; = np \\ &amp;
+=  14 * 0.16129  \\ &amp; =   2.25806  \end{align*} \]</span><br>
+<hr>
+<p><span class="math display">\[ \mbox{VARIANZA} \]</span> <br> <span
+class="math display">\[ \begin{align*} \sigma_x^2 &amp; = np(1-p) \\
+&amp; =  14 * 0.16129 *(1- 0.16129 ) \\ &amp; =   1.893858  \end{align*}
+\]</span></p>
+</div>
+</div>
+<div id="residentes" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Residentes</h2>
+<blockquote>
+<p>En la empresa NN &amp; Asociados LTDA le indica a los residentes de
+obra que habran bonificaciones por la correcta ejecucion de las
+actividades dentro de las instalaciones educativas distritales, pero
+para ello se hara un sorteo entre los profesionales del area, y para ser
+mas justos a la hora de realizar el sorteo se toman 10 colegios al azar
+de los cuales se tomara uno para determinar quien se queda con la
+bonificacion. en base a lo anterior</p>
+<ul>
+<li><p>¿Cual es la probabilidad de sacar 1 colegio coordinado por
+<strong>JUAN CARLOS RINCÓN</strong>?</p></li>
+<li><p>¿Cual es la probabilidad de sacar 1 colegio coordinado por
+<strong>OSCAR IVÁN SALAMANCA</strong>?</p></li>
+</ul>
+</blockquote>
+<div id="análisis-de-los-datos-procedentes-de-los-residentes"
+class="section level3" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> Análisis de los
+datos procedentes de los <em>RESIDENTES</em></h3>
+<hr />
+<div
+id="probabilidad-de-obtener-un-colegio-dirigido-por-juan-carlos-rincón"
+class="section level4" number="2.5.1.1">
+<h4><span class="header-section-number">2.5.1.1</span> Probabilidad de
+obtener un colegio dirigido por <strong>JUAN CARLOS RINCÓN</strong></h4>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">binomial</span>(sorteo, colegios, data, <span class="st">&quot;RESIDENTE&quot;</span>, <span class="st">&quot;JUAN CARLOS RINCÓN&quot;</span>)</span></code></pre></div>
+<hr>
+<span class="math display">\[ \mbox{FUNCION DE PROBABILIDAD} \]</span>
+<br> <span class="math display">\[ X \sim B( 10 ,  0.521739 ) \\
+\begin{array}{lcc} f(x) = \binom{ 10 }{x} 0.521739 ^{x}(1- 0.521739 )^{
+10 -x} &amp; si &amp; \quad x=0,1,2,3,... \end{array} \]</span><span
+class="math display">\[ X \sim B( 10 ,  0.521739 ) \\ \begin{array}{lcc}
+f( 1 ) = \binom{ 10 }{ 1 } 0.521739 ^{ 1 }(1- 0.521739 )^{ 10 - 1 }
+&amp; si &amp; \quad x=0,1,2,3,... \end{array} \]</span> <br> <span
+class="math display">\[ \mbox{la probabilidad es del: } 0.006830272
+\approx 0.68 \% \]</span><br>
+<hr>
+<span class="math display">\[ \mbox{MEDIA} \]</span> <br> <span
+class="math display">\[ \begin{align*} \mu = E(X) &amp; = np \\ &amp;
+=  10 * 0.521739  \\ &amp; =   5.21739  \end{align*} \]</span><br>
+<hr>
+<p><span class="math display">\[ \mbox{VARIANZA} \]</span> <br> <span
+class="math display">\[ \begin{align*} \sigma_x^2 &amp; = np(1-p) \\
+&amp; =  10 * 0.521739 *(1- 0.521739 ) \\ &amp;
+=   2.495274  \end{align*} \]</span></p>
+<hr />
+</div>
+<div
+id="probabilidad-de-obtener-un-colegio-dirigido-por-oscar-iván-salamanca"
+class="section level4" number="2.5.1.2">
+<h4><span class="header-section-number">2.5.1.2</span> Probabilidad de
+obtener un colegio dirigido por <strong>OSCAR IVÁN
+SALAMANCA</strong></h4>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">binomial</span>(sorteo, colegios, data, <span class="st">&quot;RESIDENTE&quot;</span>, <span class="st">&quot;OSCAR IVÁN SALAMANCA&quot;</span>)</span></code></pre></div>
+<hr>
+<span class="math display">\[ \mbox{FUNCION DE PROBABILIDAD} \]</span>
+<br> <span class="math display">\[ X \sim B( 10 ,  0.478261 ) \\
+\begin{array}{lcc} f(x) = \binom{ 10 }{x} 0.478261 ^{x}(1- 0.478261 )^{
+10 -x} &amp; si &amp; \quad x=0,1,2,3,... \end{array} \]</span><span
+class="math display">\[ X \sim B( 10 ,  0.478261 ) \\ \begin{array}{lcc}
+f( 1 ) = \binom{ 10 }{ 1 } 0.478261 ^{ 1 }(1- 0.478261 )^{ 10 - 1 }
+&amp; si &amp; \quad x=0,1,2,3,... \end{array} \]</span> <br> <span
+class="math display">\[ \mbox{la probabilidad es del: } 0.01370076
+\approx 1.37 \% \]</span><br>
+<hr>
+<span class="math display">\[ \mbox{MEDIA} \]</span> <br> <span
+class="math display">\[ \begin{align*} \mu = E(X) &amp; = np \\ &amp;
+=  10 * 0.478261  \\ &amp; =   4.78261  \end{align*} \]</span><br>
+<hr>
+<p><span class="math display">\[ \mbox{VARIANZA} \]</span> <br> <span
+class="math display">\[ \begin{align*} \sigma_x^2 &amp; = np(1-p) \\
+&amp; =  10 * 0.478261 *(1- 0.478261 ) \\ &amp;
+=   2.495274  \end{align*} \]</span></p>
+<hr />
+<blockquote>
+<p>Se concluye que es mas probable obtener 1 colegio de <strong>OSCAR
+IVÁN SALAMANCA</strong> con un <em><strong>1.37%</strong></em>, en
+comparacion con el <em><strong>0.68%</strong></em> de <strong>JUAN
+CARLOS RINCÓN</strong></p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

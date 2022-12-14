@@ -1,0 +1,3263 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title> Análisis exploratorio</title>
+
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #232629;
+    color: #7a7c7d;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+div.sourceCode
+  { color: #cfcfc2; background-color: #232629; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #cfcfc2; } /* Normal */
+code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+code span.an { color: #3f8058; } /* Annotation */
+code span.at { color: #2980b9; } /* Attribute */
+code span.bn { color: #f67400; } /* BaseN */
+code span.bu { color: #7f8c8d; } /* BuiltIn */
+code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #3daee9; } /* Char */
+code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+code span.co { color: #7a7c7d; } /* Comment */
+code span.cv { color: #7f8c8d; } /* CommentVar */
+code span.do { color: #a43340; } /* Documentation */
+code span.dt { color: #2980b9; } /* DataType */
+code span.dv { color: #f67400; } /* DecVal */
+code span.er { color: #da4453; text-decoration: underline; } /* Error */
+code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+code span.fl { color: #f67400; } /* Float */
+code span.fu { color: #8e44ad; } /* Function */
+code span.im { color: #27ae60; } /* Import */
+code span.in { color: #c45b00; } /* Information */
+code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+code span.op { color: #cfcfc2; } /* Operator */
+code span.ot { color: #27ae60; } /* Other */
+code span.pp { color: #27ae60; } /* Preprocessor */
+code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #da4453; } /* SpecialString */
+code span.st { color: #f44f4f; } /* String */
+code span.va { color: #27aeae; } /* Variable */
+code span.vs { color: #da4453; } /* VerbatimString */
+code span.wa { color: #da4453; } /* Warning */
+
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="assets/css/common.css" type="text/css" />
+<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css" type="text/css" />
+<link rel="stylesheet" href="https://pictogrammers.github.io/@mdi/font/6.9.96/css/materialdesignicons.min.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Probabilidad y estadistica</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fad fa-home"></span>
+     
+     Inicio
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fad fa-screen-users"></span>
+     
+     Presentacion
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="presentacion_problema.html">
+        <span class="fad fa-circle-exclamation"></span>
+         
+         El Problema
+      </a>
+    </li>
+    <li>
+      <a href="presentacion_marco.html">
+        <span class="fad fa-book-sparkles"></span>
+         
+         Marco teorico
+      </a>
+    </li>
+    <li>
+      <a href="presentacion_database.html">
+        <span class="fad fa-database"></span>
+         
+         Base de datos
+      </a>
+    </li>
+    <li>
+      <a href="presentacion_objetivos.html">
+        <span class="fad fa-bullseye-arrow"></span>
+         
+         Objetivos
+      </a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fad fa-face-hand-peeking"></span>
+     
+     Preeliminares
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="analisis_limpieza.html">
+        <span class="fad fa-bath"></span>
+         
+         Limpieza
+      </a>
+    </li>
+    <li>
+      <a href="analisis_exploratorio.html">
+        <span class="fad fa-face-monocle"></span>
+         
+         Analisis exploratorio
+      </a>
+    </li>
+    <li>
+      <a href="analisis_contingencia.html">
+        <span class="fad fa-file-spreadsheet"></span>
+         
+         Tablas contingencia
+      </a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fad fa-chart-simple"></span>
+     
+     Probabilidad
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="probabilidad_distribuciones.html">
+        <span class="fad fa-diagram-project"></span>
+         
+         Distribuciones
+      </a>
+    </li>
+    <li>
+      <a href="distribuciones_discretas.html">
+        <span class="fad fa-face-disguise"></span>
+         
+         Distribuciones discretas
+      </a>
+    </li>
+    <li>
+      <a href="pruebas_normalidad.html">
+        <span class="fad fa-list-check"></span>
+         
+         Pruebas de normalidad
+      </a>
+    </li>
+    <li>
+      <a href="ajustes_de_bondad.html">
+        <span class="fad fa-sliders"></span>
+         
+         Ajustes de bondad
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fad fa-address-card"></span>
+     
+     Acerca de
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="about.html">
+        <span class="fad fa-user-bounty-hunter"></span>
+         
+         Autor
+      </a>
+    </li>
+    <li>
+      <a href="funciones.html">
+        <span class="fad fa-terminal"></span>
+         
+         Funciones
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore"><i class='fad fa-face-monocle'></i>
+Análisis exploratorio</h1>
+
+</div>
+
+
+<blockquote>
+<p>En la fase de analisis exploratorio se va a identificar el tipo de
+variable, el tipo de dato, las frecuencias, medidas de tendencia
+central, ademas de algunos graficos a manera de representacion
+inicial</p>
+<p>Para ello se va a tener en cuenta la siguiente tabla</p>
+</blockquote>
+<table>
+<colgroup>
+<col width="29%" />
+<col width="9%" />
+<col width="9%" />
+<col width="18%" />
+<col width="9%" />
+<col width="10%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">VARIABLE</th>
+<th align="center">TIPO</th>
+<th align="center">DATO</th>
+<th align="center">FRECUENCIA</th>
+<th align="center">MODA</th>
+<th align="center">MEDIA</th>
+<th align="center">MEDIANA</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ID</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+</tr>
+<tr class="even">
+<td align="left">ZONA</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+</tr>
+<tr class="odd">
+<td align="left">LOC</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+</tr>
+<tr class="even">
+<td align="left">NOMBRE COLEGIO</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+</tr>
+<tr class="odd">
+<td align="left">SEDE</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">⬜</td>
+</tr>
+<tr class="even">
+<td align="left">CLASE</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+</tr>
+<tr class="odd">
+<td align="left">ACTA</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+</tr>
+<tr class="even">
+<td align="left">ENCARGADO</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+</tr>
+<tr class="odd">
+<td align="left">VALOR_DIAGNOSTICO</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+</tr>
+<tr class="even">
+<td align="left">VALOR_EJECUCION</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+</tr>
+<tr class="odd">
+<td align="left">FECHA_EJECUCION</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+</tr>
+<tr class="even">
+<td align="left">RESIDENTE</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+</tr>
+<tr class="odd">
+<td align="left">FOME</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">⬜</td>
+<td align="center">⬜</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Se obtiene la base de datos luego de realizar el tratamiento de
+limpieza, busqueda de datos duplicados</p>
+</blockquote>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura de base datos</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>DB <span class="ot">&lt;-</span> <span class="fu">getDatabaseClean</span>(<span class="st">&#39;dataset.xlsx&#39;</span>, <span class="st">&#39;data&#39;</span>, <span class="st">&#39;VALOR_EJECUCION&#39;</span>)</span></code></pre></div>
+<div id="proceso-de-limpieza-de-datos" class="section level2"
+number="0.1">
+<h2><span class="header-section-number">0.1</span> Proceso de limpieza
+de datos</h2>
+<blockquote>
+<p>RESGISTROS ANTES DE LA LIMPIEZA <span
+class="badge bg-primary">779</span></p>
+<p>RESGISTROS LUEGO DE LA LIMPIEZA <span
+class="badge bg-primary">713</span></p>
+</blockquote>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> DB<span class="sc">$</span>data</span></code></pre></div>
+</div>
+<div id="tipos" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Tipos</h1>
+<table>
+<thead>
+<tr class="header">
+<th align="left">VARIABLE</th>
+<th align="center">TIPO</th>
+<th align="center">DATOS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ID</td>
+<td align="center">CUANTITATIVA</td>
+<td align="center">DISCRETOS</td>
+</tr>
+<tr class="even">
+<td align="left">ZONA</td>
+<td align="center">CATEGORICA</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="left">LOC</td>
+<td align="center">CATEGORICA</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="left">NOMBRE COLEGIO</td>
+<td align="center">CATEGORICA</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="left">SEDE</td>
+<td align="center">CATEGORICA</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="left">CLASE</td>
+<td align="center">CATEGORICA</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="left">ACTA</td>
+<td align="center">CATEGORICA</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="left">ENCARGADO</td>
+<td align="center">CATEGORICA</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="left">VALOR_DIAGNOSTICO</td>
+<td align="center">CATEGORICA</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="left">VALOR_EJECUCION</td>
+<td align="center">CUANTITATIVA</td>
+<td align="center">CONTINUOS</td>
+</tr>
+<tr class="odd">
+<td align="left">FECHA_EJECUCION</td>
+<td align="center">CUANTITATIVA</td>
+<td align="center">CONTINUOS</td>
+</tr>
+<tr class="even">
+<td align="left">RESIDENTE</td>
+<td align="center">CATEGORICA</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="left">FOME</td>
+<td align="center">CATEGORICA</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="frecuencias" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Frecuencias</h1>
+<blockquote>
+<p>En la grafica de las frecuencias se empleara una funcion a fin de
+facilitar la lectura y escritura del codigo en <strong>R</strong></p>
+</blockquote>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getFrecs</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> data<span class="sc">$</span>ZONA, <span class="at">title =</span> <span class="st">&quot;SEDES POR ZONA&quot;</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlabel =</span> <span class="st">&quot;ZONAS&quot;</span>, <span class="at">ylabel =</span> <span class="st">&quot;SEDES&quot;</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<h4>
+TABLA DE FRECUENCIAS PARA SEDES POR ZONA
+</h4>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Freq
+</th>
+<th style="text-align:right;">
+% Valid
+</th>
+<th style="text-align:right;">
+% Valid Cum.
+</th>
+<th style="text-align:right;">
+% Total
+</th>
+<th style="text-align:right;">
+% Total Cum.
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:right;">
+190
+</td>
+<td style="text-align:right;">
+26.65
+</td>
+<td style="text-align:right;">
+26.65
+</td>
+<td style="text-align:right;">
+26.65
+</td>
+<td style="text-align:right;">
+26.65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+OC
+</td>
+<td style="text-align:right;">
+192
+</td>
+<td style="text-align:right;">
+26.93
+</td>
+<td style="text-align:right;">
+53.58
+</td>
+<td style="text-align:right;">
+26.93
+</td>
+<td style="text-align:right;">
+53.58
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+OR
+</td>
+<td style="text-align:right;">
+153
+</td>
+<td style="text-align:right;">
+21.46
+</td>
+<td style="text-align:right;">
+75.04
+</td>
+<td style="text-align:right;">
+21.46
+</td>
+<td style="text-align:right;">
+75.04
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:right;">
+178
+</td>
+<td style="text-align:right;">
+24.96
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+24.96
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+&lt;NA&gt;
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Total
+</td>
+<td style="text-align:right;">
+713
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="analisis_exploratorio_files/figure-html/frecuencias-zona-1.png" width="672" /></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getFrecs</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> data<span class="sc">$</span>LOC, <span class="at">title =</span> <span class="st">&quot;SEDES POR LOCALIDAD&quot;</span>, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlabel =</span> <span class="st">&quot;LOCALIDADES&quot;</span>, <span class="at">ylabel =</span> <span class="st">&quot;SEDES&quot;</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<h4>
+TABLA DE FRECUENCIAS PARA SEDES POR LOCALIDAD
+</h4>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Freq
+</th>
+<th style="text-align:right;">
+% Valid
+</th>
+<th style="text-align:right;">
+% Valid Cum.
+</th>
+<th style="text-align:right;">
+% Total
+</th>
+<th style="text-align:right;">
+% Total Cum.
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+ANTONIO NARIÑO
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+1.68
+</td>
+<td style="text-align:right;">
+1.68
+</td>
+<td style="text-align:right;">
+1.68
+</td>
+<td style="text-align:right;">
+1.68
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BARRIOS UNIDOS
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+3.37
+</td>
+<td style="text-align:right;">
+5.05
+</td>
+<td style="text-align:right;">
+3.37
+</td>
+<td style="text-align:right;">
+5.05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BOSA
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+8.27
+</td>
+<td style="text-align:right;">
+13.32
+</td>
+<td style="text-align:right;">
+8.27
+</td>
+<td style="text-align:right;">
+13.32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CHAPINERO
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+14.31
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+14.31
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CIUDAD BOLÍVAR
+</td>
+<td style="text-align:right;">
+82
+</td>
+<td style="text-align:right;">
+11.50
+</td>
+<td style="text-align:right;">
+25.81
+</td>
+<td style="text-align:right;">
+11.50
+</td>
+<td style="text-align:right;">
+25.81
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ENGATIVÁ
+</td>
+<td style="text-align:right;">
+64
+</td>
+<td style="text-align:right;">
+8.98
+</td>
+<td style="text-align:right;">
+34.78
+</td>
+<td style="text-align:right;">
+8.98
+</td>
+<td style="text-align:right;">
+34.78
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FONTIBÓN
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+3.65
+</td>
+<td style="text-align:right;">
+38.43
+</td>
+<td style="text-align:right;">
+3.65
+</td>
+<td style="text-align:right;">
+38.43
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+KENNEDY
+</td>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:right;">
+10.52
+</td>
+<td style="text-align:right;">
+48.95
+</td>
+<td style="text-align:right;">
+10.52
+</td>
+<td style="text-align:right;">
+48.95
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LA CANDELARIA
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+49.37
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+49.37
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LOS MÁRTIRES
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+1.82
+</td>
+<td style="text-align:right;">
+51.19
+</td>
+<td style="text-align:right;">
+1.82
+</td>
+<td style="text-align:right;">
+51.19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PUENTE ARANDA
+</td>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:right;">
+4.49
+</td>
+<td style="text-align:right;">
+55.68
+</td>
+<td style="text-align:right;">
+4.49
+</td>
+<td style="text-align:right;">
+55.68
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RAFAEL URIBE URIBE
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+7.01
+</td>
+<td style="text-align:right;">
+62.69
+</td>
+<td style="text-align:right;">
+7.01
+</td>
+<td style="text-align:right;">
+62.69
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SAN CRISTÓBAL
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+8.27
+</td>
+<td style="text-align:right;">
+70.97
+</td>
+<td style="text-align:right;">
+8.27
+</td>
+<td style="text-align:right;">
+70.97
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SANTA FÉ
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+2.24
+</td>
+<td style="text-align:right;">
+73.21
+</td>
+<td style="text-align:right;">
+2.24
+</td>
+<td style="text-align:right;">
+73.21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SUBA
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+9.12
+</td>
+<td style="text-align:right;">
+82.33
+</td>
+<td style="text-align:right;">
+9.12
+</td>
+<td style="text-align:right;">
+82.33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TEUSAQUILLO
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.70
+</td>
+<td style="text-align:right;">
+83.03
+</td>
+<td style="text-align:right;">
+0.70
+</td>
+<td style="text-align:right;">
+83.03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TUNJUELITO
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+3.93
+</td>
+<td style="text-align:right;">
+86.96
+</td>
+<td style="text-align:right;">
+3.93
+</td>
+<td style="text-align:right;">
+86.96
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+USAQUÉN
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+3.51
+</td>
+<td style="text-align:right;">
+90.46
+</td>
+<td style="text-align:right;">
+3.51
+</td>
+<td style="text-align:right;">
+90.46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+USME
+</td>
+<td style="text-align:right;">
+68
+</td>
+<td style="text-align:right;">
+9.54
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+9.54
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+&lt;NA&gt;
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Total
+</td>
+<td style="text-align:right;">
+713
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="analisis_exploratorio_files/figure-html/frecuencias-localidad-1.png" width="672" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getFrecs</span>( </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> data<span class="sc">$</span>SEDE, <span class="at">title =</span> <span class="st">&quot;SEDES DE CADA IED&quot;</span>, </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlabel =</span> <span class="st">&quot;SEDES&quot;</span>, <span class="at">ylabel =</span> <span class="st">&quot;INSTITUCIONES&quot;</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<h4>
+TABLA DE FRECUENCIAS PARA SEDES DE CADA IED
+</h4>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Freq
+</th>
+<th style="text-align:right;">
+% Valid
+</th>
+<th style="text-align:right;">
+% Valid Cum.
+</th>
+<th style="text-align:right;">
+% Total
+</th>
+<th style="text-align:right;">
+% Total Cum.
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+362
+</td>
+<td style="text-align:right;">
+50.77
+</td>
+<td style="text-align:right;">
+50.77
+</td>
+<td style="text-align:right;">
+50.77
+</td>
+<td style="text-align:right;">
+50.77
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+220
+</td>
+<td style="text-align:right;">
+30.86
+</td>
+<td style="text-align:right;">
+81.63
+</td>
+<td style="text-align:right;">
+30.86
+</td>
+<td style="text-align:right;">
+81.63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+96
+</td>
+<td style="text-align:right;">
+13.46
+</td>
+<td style="text-align:right;">
+95.09
+</td>
+<td style="text-align:right;">
+13.46
+</td>
+<td style="text-align:right;">
+95.09
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+4.07
+</td>
+<td style="text-align:right;">
+99.16
+</td>
+<td style="text-align:right;">
+4.07
+</td>
+<td style="text-align:right;">
+99.16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.56
+</td>
+<td style="text-align:right;">
+99.72
+</td>
+<td style="text-align:right;">
+0.56
+</td>
+<td style="text-align:right;">
+99.72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+99.86
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+99.86
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+&lt;NA&gt;
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Total
+</td>
+<td style="text-align:right;">
+713
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="analisis_exploratorio_files/figure-html/frecuencias-sedes-1.png" width="672" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getFrecs</span>( </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> data<span class="sc">$</span>ACTA, <span class="at">title =</span> <span class="st">&quot;SEDES EJECUTADAS EN CADA ACTA&quot;</span>, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlabel =</span> <span class="st">&quot;ACTAS&quot;</span>, <span class="at">ylabel =</span> <span class="st">&quot;SEDES EDUCATIVAS&quot;</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<h4>
+TABLA DE FRECUENCIAS PARA SEDES EJECUTADAS EN CADA ACTA
+</h4>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Freq
+</th>
+<th style="text-align:right;">
+% Valid
+</th>
+<th style="text-align:right;">
+% Valid Cum.
+</th>
+<th style="text-align:right;">
+% Total
+</th>
+<th style="text-align:right;">
+% Total Cum.
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:right;">
+4.49
+</td>
+<td style="text-align:right;">
+4.49
+</td>
+<td style="text-align:right;">
+4.49
+</td>
+<td style="text-align:right;">
+4.49
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:right;">
+71
+</td>
+<td style="text-align:right;">
+9.96
+</td>
+<td style="text-align:right;">
+14.45
+</td>
+<td style="text-align:right;">
+9.96
+</td>
+<td style="text-align:right;">
+14.45
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:right;">
+41
+</td>
+<td style="text-align:right;">
+5.75
+</td>
+<td style="text-align:right;">
+20.20
+</td>
+<td style="text-align:right;">
+5.75
+</td>
+<td style="text-align:right;">
+20.20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:right;">
+62
+</td>
+<td style="text-align:right;">
+8.70
+</td>
+<td style="text-align:right;">
+28.89
+</td>
+<td style="text-align:right;">
+8.70
+</td>
+<td style="text-align:right;">
+28.89
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:right;">
+73
+</td>
+<td style="text-align:right;">
+10.24
+</td>
+<td style="text-align:right;">
+39.13
+</td>
+<td style="text-align:right;">
+10.24
+</td>
+<td style="text-align:right;">
+39.13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:right;">
+83
+</td>
+<td style="text-align:right;">
+11.64
+</td>
+<td style="text-align:right;">
+50.77
+</td>
+<td style="text-align:right;">
+11.64
+</td>
+<td style="text-align:right;">
+50.77
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:right;">
+46
+</td>
+<td style="text-align:right;">
+6.45
+</td>
+<td style="text-align:right;">
+57.22
+</td>
+<td style="text-align:right;">
+6.45
+</td>
+<td style="text-align:right;">
+57.22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+8.84
+</td>
+<td style="text-align:right;">
+66.06
+</td>
+<td style="text-align:right;">
+8.84
+</td>
+<td style="text-align:right;">
+66.06
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+17
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.84
+</td>
+<td style="text-align:right;">
+66.90
+</td>
+<td style="text-align:right;">
+0.84
+</td>
+<td style="text-align:right;">
+66.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+18
+</td>
+<td style="text-align:right;">
+236
+</td>
+<td style="text-align:right;">
+33.10
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+33.10
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+&lt;NA&gt;
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Total
+</td>
+<td style="text-align:right;">
+713
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="analisis_exploratorio_files/figure-html/frecuencias-actas-1.png" width="672" /></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getFrecs</span>( </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> data<span class="sc">$</span>ENCARGADO, <span class="at">title =</span> <span class="st">&quot;SEDES POR ENCARGADO&quot;</span>, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlabel =</span> <span class="st">&quot;TÉCNICO ENCARGADO&quot;</span>, <span class="at">ylabel =</span> <span class="st">&quot;SEDES EDUCATIVAS&quot;</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<h4>
+TABLA DE FRECUENCIAS PARA SEDES POR ENCARGADO
+</h4>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Freq
+</th>
+<th style="text-align:right;">
+% Valid
+</th>
+<th style="text-align:right;">
+% Valid Cum.
+</th>
+<th style="text-align:right;">
+% Total
+</th>
+<th style="text-align:right;">
+% Total Cum.
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+ANDERSON CELY IZAQUITA
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+14.03
+</td>
+<td style="text-align:right;">
+14.03
+</td>
+<td style="text-align:right;">
+14.03
+</td>
+<td style="text-align:right;">
+14.03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BRYAN CALDERÓN OSMA
+</td>
+<td style="text-align:right;">
+48
+</td>
+<td style="text-align:right;">
+6.73
+</td>
+<td style="text-align:right;">
+20.76
+</td>
+<td style="text-align:right;">
+6.73
+</td>
+<td style="text-align:right;">
+20.76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DANIEL RAMÍREZ RODRÍGUEZ
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+4.91
+</td>
+<td style="text-align:right;">
+25.67
+</td>
+<td style="text-align:right;">
+4.91
+</td>
+<td style="text-align:right;">
+25.67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DIEGO RAMÍREZ POVEDA
+</td>
+<td style="text-align:right;">
+115
+</td>
+<td style="text-align:right;">
+16.13
+</td>
+<td style="text-align:right;">
+41.80
+</td>
+<td style="text-align:right;">
+16.13
+</td>
+<td style="text-align:right;">
+41.80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DUVAN GUANUMEN CASTILLO
+</td>
+<td style="text-align:right;">
+68
+</td>
+<td style="text-align:right;">
+9.54
+</td>
+<td style="text-align:right;">
+51.33
+</td>
+<td style="text-align:right;">
+9.54
+</td>
+<td style="text-align:right;">
+51.33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EDWIN MARROQUÍN BUSTOS
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+51.61
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+51.61
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FABIÁN LÓPEZ VANEGAS
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+1.40
+</td>
+<td style="text-align:right;">
+53.02
+</td>
+<td style="text-align:right;">
+1.40
+</td>
+<td style="text-align:right;">
+53.02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IVONNE ASPRILLA REINA
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+2.38
+</td>
+<td style="text-align:right;">
+55.40
+</td>
+<td style="text-align:right;">
+2.38
+</td>
+<td style="text-align:right;">
+55.40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+JEISSON BERMÚDEZ JARA
+</td>
+<td style="text-align:right;">
+97
+</td>
+<td style="text-align:right;">
+13.60
+</td>
+<td style="text-align:right;">
+69.00
+</td>
+<td style="text-align:right;">
+13.60
+</td>
+<td style="text-align:right;">
+69.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+JUAN CARLOS RINCÓN
+</td>
+<td style="text-align:right;">
+57
+</td>
+<td style="text-align:right;">
+7.99
+</td>
+<td style="text-align:right;">
+77.00
+</td>
+<td style="text-align:right;">
+7.99
+</td>
+<td style="text-align:right;">
+77.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MABEL OLARTE VELANDIA
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+3.79
+</td>
+<td style="text-align:right;">
+80.79
+</td>
+<td style="text-align:right;">
+3.79
+</td>
+<td style="text-align:right;">
+80.79
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+OSCAR IVÁN SALAMANCA
+</td>
+<td style="text-align:right;">
+132
+</td>
+<td style="text-align:right;">
+18.51
+</td>
+<td style="text-align:right;">
+99.30
+</td>
+<td style="text-align:right;">
+18.51
+</td>
+<td style="text-align:right;">
+99.30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SIN ASIGNAR
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+99.58
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+99.58
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+YESID TORRES HERNÁNDEZ
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+&lt;NA&gt;
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Total
+</td>
+<td style="text-align:right;">
+713
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="analisis_exploratorio_files/figure-html/frecuencias-encargado-1.png" width="672" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getFrecs</span>( </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> data<span class="sc">$</span>RESIDENTE, <span class="at">title =</span> <span class="st">&quot;SEDES POR RESIDENTE&quot;</span>, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlabel =</span> <span class="st">&quot;INGENIERO RESIDENTE&quot;</span>, <span class="at">ylabel =</span> <span class="st">&quot;SEDES EDUCATIVAS&quot;</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<h4>
+TABLA DE FRECUENCIAS PARA SEDES POR RESIDENTE
+</h4>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Freq
+</th>
+<th style="text-align:right;">
+% Valid
+</th>
+<th style="text-align:right;">
+% Valid Cum.
+</th>
+<th style="text-align:right;">
+% Total
+</th>
+<th style="text-align:right;">
+% Total Cum.
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+JUAN CARLOS RINCÓN
+</td>
+<td style="text-align:right;">
+372
+</td>
+<td style="text-align:right;">
+52.17
+</td>
+<td style="text-align:right;">
+52.17
+</td>
+<td style="text-align:right;">
+52.17
+</td>
+<td style="text-align:right;">
+52.17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+OSCAR IVÁN SALAMANCA
+</td>
+<td style="text-align:right;">
+341
+</td>
+<td style="text-align:right;">
+47.83
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+47.83
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+&lt;NA&gt;
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Total
+</td>
+<td style="text-align:right;">
+713
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="analisis_exploratorio_files/figure-html/frecuencias-residente-1.png" width="672" /></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getFrecs</span>( </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> data<span class="sc">$</span>FOME, <span class="at">title =</span> <span class="st">&quot;SEDES AFECTADAS POR RECURSO FOME&quot;</span>, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlabel =</span> <span class="st">&quot;RECURSO FOME&quot;</span>, <span class="at">ylabel =</span> <span class="st">&quot;SEDES AFECTADAS&quot;</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<caption>
+<h4>
+TABLA DE FRECUENCIAS PARA SEDES AFECTADAS POR RECURSO FOME
+</h4>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Freq
+</th>
+<th style="text-align:right;">
+% Valid
+</th>
+<th style="text-align:right;">
+% Valid Cum.
+</th>
+<th style="text-align:right;">
+% Total
+</th>
+<th style="text-align:right;">
+% Total Cum.
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:right;">
+365
+</td>
+<td style="text-align:right;">
+51.19
+</td>
+<td style="text-align:right;">
+51.19
+</td>
+<td style="text-align:right;">
+51.19
+</td>
+<td style="text-align:right;">
+51.19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:right;">
+348
+</td>
+<td style="text-align:right;">
+48.81
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+48.81
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+&lt;NA&gt;
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Total
+</td>
+<td style="text-align:right;">
+713
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+<td style="text-align:right;">
+100.00
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="analisis_exploratorio_files/figure-html/frecuencias-fome-1.png" width="672" /></p>
+</div>
+<div id="medidas-de-tendencia-central" class="section level1"
+number="3">
+<h1><span class="header-section-number">3</span> Medidas de tendencia
+central</h1>
+<blockquote>
+<p>Se realiza el calculo de las medidas de tendencia central tales como
+<strong>MEDIA, MEDIANA</strong> y <strong>MODA</strong>, para las
+diferentes variables proesentes en la base de datos</p>
+</blockquote>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fu">medidasCentrales</span>(data, <span class="st">&quot;ZONA&quot;</span>, <span class="at">moda =</span> T)</span></code></pre></div>
+[1] “
+<table class='table table-striped table-hover table-condensed table-responsive text-center'>
+<caption>
+<h4>
+TABLA DE MEDIDAS CENTRALES PARA ZONA
+<h4>
+</caption>
+<thead>
+<tr>
+<th>
+MEDIDA CENTRAL
+</th>
+<th>
+VALOR ESTIMADO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+MODA
+</td>
+<td>
+OC
+</td>
+</tr>
+</tbody>
+<p>”</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fu">medidasCentrales</span>(data, <span class="st">&quot;LOC&quot;</span>, <span class="at">moda =</span> T)</span></code></pre></div>
+[1] “
+<table class='table table-striped table-hover table-condensed table-responsive text-center'>
+<caption>
+<h4>
+TABLA DE MEDIDAS CENTRALES PARA LOC
+<h4>
+</caption>
+<thead>
+<tr>
+<th>
+MEDIDA CENTRAL
+</th>
+<th>
+VALOR ESTIMADO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+MODA
+</td>
+<td>
+CIUDAD BOLÍVAR
+</td>
+</tr>
+</tbody>
+<p>”</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fu">medidasCentrales</span>(data, <span class="st">&quot;SEDE&quot;</span>, <span class="at">media =</span> T, <span class="at">moda =</span> T)</span></code></pre></div>
+<pre><code>Warning in mean.default(database[[variable]]): argument is not numeric or
+logical: returning NA</code></pre>
+[1] “
+<table class='table table-striped table-hover table-condensed table-responsive text-center'>
+<caption>
+<h4>
+TABLA DE MEDIDAS CENTRALES PARA SEDE
+<h4>
+</caption>
+<thead>
+<tr>
+<th>
+MEDIDA CENTRAL
+</th>
+<th>
+VALOR ESTIMADO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+MODA
+</td>
+<td>
+A
+</td>
+</tr>
+NA
+</tbody>
+<p>”</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fu">medidasCentrales</span>(data, <span class="st">&quot;CLASE&quot;</span>, <span class="at">moda =</span> T)</span></code></pre></div>
+[1] “
+<table class='table table-striped table-hover table-condensed table-responsive text-center'>
+<caption>
+<h4>
+TABLA DE MEDIDAS CENTRALES PARA CLASE
+<h4>
+</caption>
+<thead>
+<tr>
+<th>
+MEDIDA CENTRAL
+</th>
+<th>
+VALOR ESTIMADO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+MODA
+</td>
+<td>
+DISTRITAL
+</td>
+</tr>
+</tbody>
+<p>”</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fu">medidasCentrales</span>(data, <span class="st">&quot;ACTA&quot;</span>, <span class="at">moda =</span> T)</span></code></pre></div>
+[1] “
+<table class='table table-striped table-hover table-condensed table-responsive text-center'>
+<caption>
+<h4>
+TABLA DE MEDIDAS CENTRALES PARA ACTA
+<h4>
+</caption>
+<thead>
+<tr>
+<th>
+MEDIDA CENTRAL
+</th>
+<th>
+VALOR ESTIMADO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+MODA
+</td>
+<td>
+18
+</td>
+</tr>
+</tbody>
+<p>”</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fu">medidasCentrales</span>(data, <span class="st">&quot;ENCARGADO&quot;</span>, <span class="at">moda =</span> T)</span></code></pre></div>
+[1] “
+<table class='table table-striped table-hover table-condensed table-responsive text-center'>
+<caption>
+<h4>
+TABLA DE MEDIDAS CENTRALES PARA ENCARGADO
+<h4>
+</caption>
+<thead>
+<tr>
+<th>
+MEDIDA CENTRAL
+</th>
+<th>
+VALOR ESTIMADO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+MODA
+</td>
+<td>
+OSCAR IVÁN SALAMANCA
+</td>
+</tr>
+</tbody>
+<p>”</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fu">medidasCentrales</span>(data, <span class="st">&quot;RESIDENTE&quot;</span>, <span class="at">moda =</span> T)</span></code></pre></div>
+[1] “
+<table class='table table-striped table-hover table-condensed table-responsive text-center'>
+<caption>
+<h4>
+TABLA DE MEDIDAS CENTRALES PARA RESIDENTE
+<h4>
+</caption>
+<thead>
+<tr>
+<th>
+MEDIDA CENTRAL
+</th>
+<th>
+VALOR ESTIMADO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+MODA
+</td>
+<td>
+JUAN CARLOS RINCÓN
+</td>
+</tr>
+</tbody>
+<p>”</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fu">medidasCentrales</span>(data, <span class="st">&quot;FOME&quot;</span>, <span class="at">moda =</span> T)</span></code></pre></div>
+[1] “
+<table class='table table-striped table-hover table-condensed table-responsive text-center'>
+<caption>
+<h4>
+TABLA DE MEDIDAS CENTRALES PARA FOME
+<h4>
+</caption>
+<thead>
+<tr>
+<th>
+MEDIDA CENTRAL
+</th>
+<th>
+VALOR ESTIMADO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+MODA
+</td>
+<td>
+FALSE
+</td>
+</tr>
+</tbody>
+<p>”</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fu">medidasCentrales</span>(data, <span class="st">&quot;VALOR_EJECUCION&quot;</span>, <span class="at">media =</span> T, <span class="at">mediana =</span> T, <span class="at">moda =</span> T)</span></code></pre></div>
+[1] “
+<table class='table table-striped table-hover table-condensed table-responsive text-center'>
+<caption>
+<h4>
+TABLA DE MEDIDAS CENTRALES PARA VALOR_EJECUCION
+<h4>
+</caption>
+<thead>
+<tr>
+<th>
+MEDIDA CENTRAL
+</th>
+<th>
+VALOR ESTIMADO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+MODA
+</td>
+<td>
+1994532.88
+</td>
+</tr>
+<tr>
+<td>
+MEDIA
+</td>
+<td>
+4004079.98
+</td>
+</tr>
+<tr>
+<td>
+MEDIANA
+</td>
+<td>
+2587418.32
+</td>
+</tr>
+</tbody>
+<p>”</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mc <span class="ot">&lt;-</span> <span class="fu">medidasCentrales</span>(data, <span class="st">&quot;VALOR_DIAGNOSTICO&quot;</span>, <span class="at">media =</span> T, <span class="at">mediana =</span> T, <span class="at">moda =</span> T)</span></code></pre></div>
+[1] “
+<table class='table table-striped table-hover table-condensed table-responsive text-center'>
+<caption>
+<h4>
+TABLA DE MEDIDAS CENTRALES PARA VALOR_DIAGNOSTICO
+<h4>
+</caption>
+<thead>
+<tr>
+<th>
+MEDIDA CENTRAL
+</th>
+<th>
+VALOR ESTIMADO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+MODA
+</td>
+<td>
+3178011.2
+</td>
+</tr>
+<tr>
+<td>
+MEDIA
+</td>
+<td>
+4419081.31
+</td>
+</tr>
+<tr>
+<td>
+MEDIANA
+</td>
+<td>
+3041729
+</td>
+</tr>
+</tbody>
+”<br />
+[2] “
+<table class='table table-striped table-hover table-condensed table-responsive text-center'>
+<caption>
+<h4>
+TABLA DE MEDIDAS CENTRALES PARA VALOR_DIAGNOSTICO
+<h4>
+</caption>
+<thead>
+<tr>
+<th>
+MEDIDA CENTRAL
+</th>
+<th>
+VALOR ESTIMADO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+MODA
+</td>
+<td>
+6781764
+</td>
+</tr>
+<tr>
+<td>
+MEDIA
+</td>
+<td>
+4419081.31
+</td>
+</tr>
+<tr>
+<td>
+MEDIANA
+</td>
+<td>
+3041729
+</td>
+</tr>
+</tbody>
+”<br />
+[3] “
+<table class='table table-striped table-hover table-condensed table-responsive text-center'>
+<caption>
+<h4>
+TABLA DE MEDIDAS CENTRALES PARA VALOR_DIAGNOSTICO
+<h4>
+</caption>
+<thead>
+<tr>
+<th>
+MEDIDA CENTRAL
+</th>
+<th>
+VALOR ESTIMADO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+MODA
+</td>
+<td>
+14672720.44
+</td>
+</tr>
+<tr>
+<td>
+MEDIA
+</td>
+<td>
+4419081.31
+</td>
+</tr>
+<tr>
+<td>
+MEDIANA
+</td>
+<td>
+3041729
+</td>
+</tr>
+</tbody>
+<p>”</p>
+</div>
+<div id="medidas-de-dispesion" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Medidas de
+dispesion</h1>
+<blockquote>
+<p>Se realiza el calculo de las medidas de tendencia central tales como
+<strong>RANGO, VARIANZA, DESVIACION</strong> y <strong>COEFICIENTE DE
+VARIACION</strong>, para las diferentes variables proesentes en la base
+de datos</p>
+</blockquote>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>md <span class="ot">&lt;-</span> <span class="fu">medidasDispersion</span>(<span class="at">database =</span> data, <span class="at">variable =</span> <span class="st">&quot;VALOR_DIAGNOSTICO&quot;</span>, <span class="at">rango =</span> T, <span class="at">varianza =</span> T,<span class="at">desviacion =</span> T, <span class="at">coeficienteVariacion =</span> T)</span></code></pre></div>
+[1] “
+<table class='table table-striped table-hover table-condensed table-responsive text-center'>
+<caption>
+<h4>
+TABLA DE MEDIDAS DE DISPERSION PARA VALOR_DIAGNOSTICO
+<h4>
+</caption>
+<thead>
+<tr>
+<th>
+MEDIDA DE DISPERSION
+</th>
+<th>
+VALOR ESTIMADO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+RANGO DE LOS DATOS
+</td>
+<td>
+176110
+</td>
+</tr>
+<tr>
+<td>
+VARIANZA
+</td>
+<td>
+18417383162371.3
+</td>
+</tr>
+<tr>
+<td>
+DESVIACION ESTANDAR
+</td>
+<td>
+4291547.87487816
+</td>
+</tr>
+<tr>
+<td>
+COEFICIENTE DE VARIACION
+</td>
+<td>
+0.971140284005898
+</td>
+</tr>
+</tbody>
+”<br />
+[2] “
+<table class='table table-striped table-hover table-condensed table-responsive text-center'>
+<caption>
+<h4>
+TABLA DE MEDIDAS DE DISPERSION PARA VALOR_DIAGNOSTICO
+<h4>
+</caption>
+<thead>
+<tr>
+<th>
+MEDIDA DE DISPERSION
+</th>
+<th>
+VALOR ESTIMADO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+RANGO DE LOS DATOS
+</td>
+<td>
+27039763.48
+</td>
+</tr>
+<tr>
+<td>
+VARIANZA
+</td>
+<td>
+18417383162371.3
+</td>
+</tr>
+<tr>
+<td>
+DESVIACION ESTANDAR
+</td>
+<td>
+4291547.87487816
+</td>
+</tr>
+<tr>
+<td>
+COEFICIENTE DE VARIACION
+</td>
+<td>
+0.971140284005898
+</td>
+</tr>
+</tbody>
+<p>”
+<img src="analisis_exploratorio_files/figure-html/dispersion-1.png" width="672" /></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>md <span class="ot">&lt;-</span> <span class="fu">medidasDispersion</span>(<span class="at">database =</span> data, <span class="at">variable =</span> <span class="st">&quot;VALOR_EJECUCION&quot;</span>, <span class="at">rango =</span> T, <span class="at">varianza =</span> T,<span class="at">desviacion =</span> T, <span class="at">coeficienteVariacion =</span> T)</span></code></pre></div>
+[1] “
+<table class='table table-striped table-hover table-condensed table-responsive text-center'>
+<caption>
+<h4>
+TABLA DE MEDIDAS DE DISPERSION PARA VALOR_EJECUCION
+<h4>
+</caption>
+<thead>
+<tr>
+<th>
+MEDIDA DE DISPERSION
+</th>
+<th>
+VALOR ESTIMADO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+RANGO DE LOS DATOS
+</td>
+<td>
+176110
+</td>
+</tr>
+<tr>
+<td>
+VARIANZA
+</td>
+<td>
+15575761395152.4
+</td>
+</tr>
+<tr>
+<td>
+DESVIACION ESTANDAR
+</td>
+<td>
+3946613.91513692
+</td>
+</tr>
+<tr>
+<td>
+COEFICIENTE DE VARIACION
+</td>
+<td>
+0.985648122758584
+</td>
+</tr>
+</tbody>
+”<br />
+[2] “
+<table class='table table-striped table-hover table-condensed table-responsive text-center'>
+<caption>
+<h4>
+TABLA DE MEDIDAS DE DISPERSION PARA VALOR_EJECUCION
+<h4>
+</caption>
+<thead>
+<tr>
+<th>
+MEDIDA DE DISPERSION
+</th>
+<th>
+VALOR ESTIMADO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+RANGO DE LOS DATOS
+</td>
+<td>
+29289433.6
+</td>
+</tr>
+<tr>
+<td>
+VARIANZA
+</td>
+<td>
+15575761395152.4
+</td>
+</tr>
+<tr>
+<td>
+DESVIACION ESTANDAR
+</td>
+<td>
+3946613.91513692
+</td>
+</tr>
+<tr>
+<td>
+COEFICIENTE DE VARIACION
+</td>
+<td>
+0.985648122758584
+</td>
+</tr>
+</tbody>
+<p>”
+<img src="analisis_exploratorio_files/figure-html/dispersion-2.png" width="672" /></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5,h6",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

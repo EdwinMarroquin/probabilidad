@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title> Limpieza</title>
+
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #232629;
+    color: #7a7c7d;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+div.sourceCode
+  { color: #cfcfc2; background-color: #232629; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #cfcfc2; } /* Normal */
+code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+code span.an { color: #3f8058; } /* Annotation */
+code span.at { color: #2980b9; } /* Attribute */
+code span.bn { color: #f67400; } /* BaseN */
+code span.bu { color: #7f8c8d; } /* BuiltIn */
+code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #3daee9; } /* Char */
+code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+code span.co { color: #7a7c7d; } /* Comment */
+code span.cv { color: #7f8c8d; } /* CommentVar */
+code span.do { color: #a43340; } /* Documentation */
+code span.dt { color: #2980b9; } /* DataType */
+code span.dv { color: #f67400; } /* DecVal */
+code span.er { color: #da4453; text-decoration: underline; } /* Error */
+code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+code span.fl { color: #f67400; } /* Float */
+code span.fu { color: #8e44ad; } /* Function */
+code span.im { color: #27ae60; } /* Import */
+code span.in { color: #c45b00; } /* Information */
+code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+code span.op { color: #cfcfc2; } /* Operator */
+code span.ot { color: #27ae60; } /* Other */
+code span.pp { color: #27ae60; } /* Preprocessor */
+code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #da4453; } /* SpecialString */
+code span.st { color: #f44f4f; } /* String */
+code span.va { color: #27aeae; } /* Variable */
+code span.vs { color: #da4453; } /* VerbatimString */
+code span.wa { color: #da4453; } /* Warning */
+
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="assets/css/common.css" type="text/css" />
+<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css" type="text/css" />
+<link rel="stylesheet" href="https://pictogrammers.github.io/@mdi/font/6.9.96/css/materialdesignicons.min.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Probabilidad y estadistica</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fad fa-home"></span>
+     
+     Inicio
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fad fa-screen-users"></span>
+     
+     Presentacion
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="presentacion_problema.html">
+        <span class="fad fa-circle-exclamation"></span>
+         
+         El Problema
+      </a>
+    </li>
+    <li>
+      <a href="presentacion_marco.html">
+        <span class="fad fa-book-sparkles"></span>
+         
+         Marco teorico
+      </a>
+    </li>
+    <li>
+      <a href="presentacion_database.html">
+        <span class="fad fa-database"></span>
+         
+         Base de datos
+      </a>
+    </li>
+    <li>
+      <a href="presentacion_objetivos.html">
+        <span class="fad fa-bullseye-arrow"></span>
+         
+         Objetivos
+      </a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fad fa-face-hand-peeking"></span>
+     
+     Preeliminares
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="analisis_limpieza.html">
+        <span class="fad fa-bath"></span>
+         
+         Limpieza
+      </a>
+    </li>
+    <li>
+      <a href="analisis_exploratorio.html">
+        <span class="fad fa-face-monocle"></span>
+         
+         Analisis exploratorio
+      </a>
+    </li>
+    <li>
+      <a href="analisis_contingencia.html">
+        <span class="fad fa-file-spreadsheet"></span>
+         
+         Tablas contingencia
+      </a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fad fa-chart-simple"></span>
+     
+     Probabilidad
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="probabilidad_distribuciones.html">
+        <span class="fad fa-diagram-project"></span>
+         
+         Distribuciones
+      </a>
+    </li>
+    <li>
+      <a href="distribuciones_discretas.html">
+        <span class="fad fa-face-disguise"></span>
+         
+         Distribuciones discretas
+      </a>
+    </li>
+    <li>
+      <a href="pruebas_normalidad.html">
+        <span class="fad fa-list-check"></span>
+         
+         Pruebas de normalidad
+      </a>
+    </li>
+    <li>
+      <a href="ajustes_de_bondad.html">
+        <span class="fad fa-sliders"></span>
+         
+         Ajustes de bondad
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fad fa-address-card"></span>
+     
+     Acerca de
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="about.html">
+        <span class="fad fa-user-bounty-hunter"></span>
+         
+         Autor
+      </a>
+    </li>
+    <li>
+      <a href="funciones.html">
+        <span class="fad fa-terminal"></span>
+         
+         Funciones
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore"><i class='fad fa-bath'></i> Limpieza</h1>
+
+</div>
+
+
+<div id="limpieza" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Limpieza</h1>
+<blockquote>
+<p>Se aclara que las instituciones de la localidad 20 <strong>Localidad
+de Sumapaz</strong>, no fueron intervenidas, al igual que las
+instituciones de clase <strong>ADMINISTRACIÓN</strong></p>
+<p>Por lo anterior se hace mas fácil realizar el filtro de las
+instituciones que tienen un valor diferente de <strong>0</strong> en la
+variable <strong>VALOR_EJECUCIÓN</strong>, dejando asi un</p>
+</blockquote>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>DB <span class="ot">&lt;-</span> <span class="fu">getDatabaseClean</span>(<span class="st">&quot;dataset.xlsx&quot;</span>, <span class="st">&quot;data&quot;</span>, <span class="st">&quot;VALOR_EJECUCION&quot;</span>)</span></code></pre></div>
+<div id="proceso-de-limpieza-de-datos" class="section level2"
+number="1.1">
+<h2><span class="header-section-number">1.1</span> Proceso de limpieza
+de datos</h2>
+<blockquote>
+<p>RESGISTROS ANTES DE LA LIMPIEZA <span
+class="badge bg-primary">779</span></p>
+<p>RESGISTROS LUEGO DE LA LIMPIEZA <span
+class="badge bg-primary">713</span></p>
+</blockquote>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> DB<span class="sc">$</span>data</span></code></pre></div>
+</div>
+</div>
+<div id="registros-duplicados" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Registros
+duplicados</h1>
+<blockquote>
+<p>En primera instancia se hace la revision de los registros realizando
+la búsqueda de datos duplicados que puedan alterar el análisis en la
+base datos</p>
+</blockquote>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Búsqueda de valores duplicados validando la columna ID</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>bD <span class="ot">&lt;-</span> <span class="fu">findDatabaseDuplicades</span>(<span class="st">&quot;ID&quot;</span>, data)</span></code></pre></div>
+<p><strong>VALIDANDO REGISTROS DUPLICADOS DE (ID)</strong></p>
+<blockquote>
+<p>El campo <strong>ID</strong> continene <span
+class="badge bg-primary">713</span> registros</p>
+<p>El campo <strong>ID</strong> continene <span
+class="badge bg-primary">713</span> registros únicos</p>
+<p><strong>No existen registros duplicados</strong></p>
+</blockquote>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Búsqueda de valores duplicados validando la columna NOMBRE COLEGIO</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bD <span class="ot">&lt;-</span> <span class="fu">findDatabaseDuplicades</span>(<span class="st">&quot;NOMBRE COLEGIO&quot;</span>, data)</span></code></pre></div>
+<p><strong>VALIDANDO REGISTROS DUPLICADOS DE (NOMBRE
+COLEGIO)</strong></p>
+<blockquote>
+<p>El campo <strong>NOMBRE COLEGIO</strong> continene <span
+class="badge bg-primary">713</span> registros</p>
+<p>El campo <strong>NOMBRE COLEGIO</strong> continene <span
+class="badge bg-primary">367</span> registros únicos</p>
+<p><strong>Existen registros duplicados</strong></p>
+</blockquote>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Búsqueda de valores duplicados validando la columna SEDE</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>bD <span class="ot">&lt;-</span> <span class="fu">findDatabaseDuplicades</span>(<span class="st">&quot;SEDE&quot;</span>, data)</span></code></pre></div>
+<p><strong>VALIDANDO REGISTROS DUPLICADOS DE (SEDE)</strong></p>
+<blockquote>
+<p>El campo <strong>SEDE</strong> continene <span
+class="badge bg-primary">713</span> registros</p>
+<p>El campo <strong>SEDE</strong> continene <span
+class="badge bg-primary">7</span> registros únicos</p>
+<p><strong>Existen registros duplicados</strong></p>
+</blockquote>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Búsqueda de valores duplicados validando la columna CLASE</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>bD <span class="ot">&lt;-</span> <span class="fu">findDatabaseDuplicades</span>(<span class="st">&quot;CLASE&quot;</span>, data)</span></code></pre></div>
+<p><strong>VALIDANDO REGISTROS DUPLICADOS DE (CLASE)</strong></p>
+<blockquote>
+<p>El campo <strong>CLASE</strong> continene <span
+class="badge bg-primary">713</span> registros</p>
+<p>El campo <strong>CLASE</strong> continene <span
+class="badge bg-primary">3</span> registros únicos</p>
+<p><strong>Existen registros duplicados</strong></p>
+</blockquote>
+<div id="conclusiones" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Conclusiones</h2>
+<blockquote>
+<p>Al realizar el analisis de los campos principales para la
+identificacion de los registros, se evidencia que el campo a tener en
+cuenta es la columna <strong>ID</strong> ya que este es el unico que
+asegura que no hay presencia de registros duplicados</p>
+</blockquote>
+</div>
+</div>
+<div id="registros-redundantes" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Registros
+redundantes</h1>
+<blockquote>
+<p>Seguido se realiza la eleminacion de resgistros que no aportan para
+el analisis de las variables mediante una funcion aplicada a la base de
+datos inicial.</p>
+<p>Luego del analisis de registros redundantes se tiene la siguiente
+tabla en donde se muestran los siguientes valores:</p>
+</blockquote>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  data[, <span class="fu">c</span>(<span class="st">&#39;ID&#39;</span>, <span class="st">&#39;VALOR_DIAGNOSTICO&#39;</span>, <span class="st">&#39;VALOR_EJECUCION&#39;</span>)], </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fast =</span> <span class="cn">TRUE</span>)  <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span>  <span class="fu">kable_styling</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+vars
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+min
+</th>
+<th style="text-align:right;">
+max
+</th>
+<th style="text-align:right;">
+range
+</th>
+<th style="text-align:right;">
+se
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+ID
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+713
+</td>
+<td style="text-align:right;">
+379.9888
+</td>
+<td style="text-align:right;">
+220.2813
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+779
+</td>
+<td style="text-align:right;">
+778
+</td>
+<td style="text-align:right;">
+8.2496
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VALOR_DIAGNOSTICO
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+713
+</td>
+<td style="text-align:right;">
+4419081.3063
+</td>
+<td style="text-align:right;">
+4291547.8749
+</td>
+<td style="text-align:right;">
+176110
+</td>
+<td style="text-align:right;">
+27039763
+</td>
+<td style="text-align:right;">
+26863653
+</td>
+<td style="text-align:right;">
+160719.7310
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+VALOR_EJECUCION
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+713
+</td>
+<td style="text-align:right;">
+4004079.9795
+</td>
+<td style="text-align:right;">
+3946613.9151
+</td>
+<td style="text-align:right;">
+176110
+</td>
+<td style="text-align:right;">
+29289434
+</td>
+<td style="text-align:right;">
+29113324
+</td>
+<td style="text-align:right;">
+147801.8527
+</td>
+</tr>
+</tbody>
+</table>
+<div id="conclusiones-1" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Conclusiones</h2>
+<blockquote>
+<ul>
+<li><p>Se observa que la base de datos cuenta con <span
+class="badge bg-primary">713</span> registros únicos</p></li>
+<li><p>Se a hallado <span class="badge bg-prymary">66</span> registros
+que no cuentan con un presupuesto asignado para la ejecucion de las
+actividades de demarcacion y señalizacion dentro y fuera de las
+instalaciones de la Institucion Educativa Distrital</p></li>
+<li><p>Dado que estos registros no aportan informacion relevante para el
+caso de estudio estos registros ha sido descartados</p></li>
+</ul>
+</blockquote>
+</div>
+</div>
+<div id="variables-redundantes" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Variables
+redundantes</h1>
+<blockquote>
+<p>Para la identificacion de variables redundantes se empleara el metodo
+de coeficiente de correlacion</p>
+</blockquote>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cuanti<span class="ot">&lt;-</span><span class="fu">select</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  data, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;ID&quot;</span>,<span class="st">&quot;ACTA&quot;</span>, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;VALOR_DIAGNOSTICO&quot;</span>, <span class="st">&quot;VALOR_EJECUCION&quot;</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cuanti)  <span class="sc">%&gt;%</span> <span class="fu">kbl</span>() <span class="sc">%&gt;%</span>  <span class="fu">kable_styling</span>(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;responsive&quot;</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+ID
+</th>
+<th style="text-align:right;">
+ACTA
+</th>
+<th style="text-align:right;">
+VALOR_DIAGNOSTICO
+</th>
+<th style="text-align:right;">
+VALOR_EJECUCION
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+2776391
+</td>
+<td style="text-align:right;">
+2421443.2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+1900398
+</td>
+<td style="text-align:right;">
+1154582.4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+1924070
+</td>
+<td style="text-align:right;">
+1723174.9
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+589123
+</td>
+<td style="text-align:right;">
+670999.5
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+4329138
+</td>
+<td style="text-align:right;">
+3503002.0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+1967335
+</td>
+<td style="text-align:right;">
+3052744.3
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  cuanti, <span class="at">col =</span> <span class="st">&#39;11&#39;</span>, <span class="at">pch =</span> <span class="dv">18</span>,  <span class="at">main =</span> <span class="st">&quot;Tabla de corelaciones de la base de datos&quot;</span>)</span></code></pre></div>
+<p><img src="analisis_limpieza_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div id="conclusiones-2" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Conclusiones</h2>
+<blockquote>
+<p>Debido a la naturaleza de los datos se evidencia que la variable
+<strong>ID</strong> y la variable <strong>LOCALIDAD</strong> tienen una
+fuerte corelacion, pero debido a que <strong>ID</strong> es solo el
+identificador del registro y es empleada simplemente para determinar la
+cantidad de filas almacenadas detro de la base de datos, porlo que no se
+hace necesario prescindir de una de las variables</p>
+</blockquote>
+<blockquote>
+<p>Tambien se puede observar que <strong>VALOR_DIAGNOSTICO</strong> y
+<strong>VALOR_EJECUCIO</strong> tienen fuerte correlacion, con base en
+lo anterior se informa que a pesar de presentarse esta correlacion, las
+variables deben ser tratadas de forma independiente ya que estas cumplen
+roles importantes en diferentes etapas del proceso de ejecucion del
+contrato de estudio.</p>
+</blockquote>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5,h6",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
